@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Kimia Kelas XI - Hidrokarbon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
+            color: #fff;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 1.8em; margin-bottom: 8px; }
+        .header p { font-size: 0.95em; opacity: 0.9; }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #e8f5e9;
+            padding: 15px;
+            border-bottom: 2px solid #c8e6c9;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .info-item { text-align: center; font-size: 0.9em; }
+        .info-item strong { display: block; color: #0f5132; font-size: 1.1em; }
+
+        .content { padding: 30px 40px; }
+
+        .section-title {
+            background: #0f5132;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 25px 0 15px 0;
+            font-size: 1.1em;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        .petunjuk {
+            background: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .petunjuk ol { margin-left: 20px; margin-top: 8px; }
+
+        .soal {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 18px;
+            transition: box-shadow 0.2s;
+        }
+        .soal:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+
+        .soal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .soal-nomor {
+            background: #198754;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .soal-tipe {
+            font-size: 0.78em;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .tipe-pg { background: #e3f2fd; color: #1565c0; }
+        .tipe-pgk { background: #f3e5f5; color: #7b1fa2; }
+        .tipe-uraian { background: #e8f5e9; color: #2e7d32; }
+        .tipe-hots { background: #fff3e0; color: #e65100; }
+
+        .soal-text { font-size: 0.98em; line-height: 1.7; margin-bottom: 12px; }
+
+        .soal-text table {
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        .soal-text table th, .soal-text table td {
+            border: 1px solid #bbb;
+            padding: 6px 14px;
+            text-align: center;
+        }
+        .soal-text table th { background: #e8eaf6; }
+
+        .struktur {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 6px 0;
+            font-size: 0.95em;
+            border: 1px dashed #999;
+        }
+
+        .pilihan { display: flex; flex-direction: column; gap: 8px; margin-left: 5px; }
+        .pilihan label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .pilihan label:hover { background: #e8f5e9; }
+        .pilihan input[type="radio"],
+        .pilihan input[type="checkbox"] {
+            margin-top: 3px;
+            transform: scale(1.15);
+            accent-color: #198754;
+        }
+
+        .jawaban-uraian {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+        .jawaban-uraian:focus { outline: none; border-color: #198754; }
+
+        .btn-container {
+            text-align: center;
+            padding: 30px 40px;
+            background: #e8f5e9;
+        }
+        .btn {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0f5132, #198754);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15,81,50,0.4);
+        }
+        .btn-secondary {
+            background: #fff;
+            color: #0f5132;
+            border: 2px solid #0f5132;
+        }
+        .btn-secondary:hover { background: #0f5132; color: #fff; }
+
+        .hasil {
+            display: none;
+            padding: 30px 40px;
+            background: #e8f5e9;
+            border-top: 3px solid #4caf50;
+        }
+        .hasil h2 { color: #2e7d32; margin-bottom: 15px; text-align: center; }
+        .skor-display {
+            text-align: center;
+            font-size: 3em;
+            font-weight: bold;
+            color: #0f5132;
+            margin: 15px 0;
+        }
+        .skor-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .skor-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .skor-card h3 { font-size: 0.9em; color: #666; margin-bottom: 5px; }
+        .skor-card p { font-size: 1.5em; font-weight: bold; color: #0f5132; }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .feedback.lulus { background: #c8e6c9; color: #1b5e20; }
+        .feedback.tidak-lulus { background: #ffcdd2; color: #b71c1c; }
+
+        .kunci-section {
+            display: none;
+            padding: 30px 40px;
+            background: #fff8e1;
+            border-top: 3px solid #ffc107;
+        }
+        .kunci-section h2 { color: #e65100; margin-bottom: 15px; }
+        .kunci-item {
+            background: #fff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+            font-size: 0.92em;
+            line-height: 1.6;
+        }
+        .kunci-item strong { color: #0f5132; }
+        .pembahasan { margin-top: 6px; color: #555; font-size: 0.9em; }
+        .badge-benar { color: #2e7d32; font-weight: bold; }
+        .badge-salah { color: #c62828; font-weight: bold; }
+
+        /* ====== PERINGATAN & OVERLAY ====== */
+        #peringatan {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #c62828;
+            color: #fff;
+            text-align: center;
+            padding: 16px;
+            font-weight: bold;
+            font-size: 1.1em;
+            z-index: 99998;
+            animation: kedip 0.4s infinite alternate;
+            box-shadow: 0 4px 20px rgba(198,40,40,0.6);
+        }
+        @keyframes kedip { from { opacity: 1; } to { opacity: 0.55; } }
+
+        #blokirOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+        }
+        #blokirOverlay h1 { font-size: 2.5em; color: #ff5252; margin-bottom: 20px; }
+        #blokirOverlay p { font-size: 1.15em; max-width: 620px; line-height: 1.7; }
+        #blokirOverlay .ikon { font-size: 5em; margin-bottom: 10px; }
+
+        .status-aman {
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .content, .btn-container, .hasil, .kunci-section { padding: 20px; }
+            .header { padding: 20px; }
+            .header h1 { font-size: 1.3em; }
+            .info-bar { flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- OVERLAY BLOKIR -->
+<div id="blokirOverlay">
+    <div class="ikon">⛔</div>
+    <h1>UJIAN DIHENTIKAN</h1>
+    <p id="blokirPesan">Terdeteksi tindak kecurangan. Ujian telah dihentikan.</p>
+</div>
+
+<!-- PERINGATAN -->
+<div id="peringatan">⚠️ TERDETEKSI KECURANGAN! ⚠️</div>
+
+<div class="container" id="ujianContainer">
+    <div class="header">
+        <h1>UJIAN KIMIA KELAS XI</h1>
+        <p>Materi: Hidrokarbon | Kurikulum Merdeka Fase F</p>
+        <div class="status-aman" id="statusAman">🔒 Mode Ujian Aman Aktif</div>
+    </div>
+
+    <div class="info-bar">
+        <div class="info-item"><strong>25</strong> Pilihan Ganda</div>
+        <div class="info-item"><strong>5</strong> PG Kompleks</div>
+        <div class="info-item"><strong>5</strong> Uraian</div>
+        <div class="info-item"><strong>90</strong> Menit</div>
+    </div>
+
+    <div class="content" id="soalContainer"></div>
+
+    <div class="btn-container">
+        <button class="btn btn-primary" onclick="hitungSkor()">Selesai &amp; Lihat Hasil</button>
+        <button class="btn btn-secondary" onclick="resetUjian()">Reset Ujian</button>
+    </div>
+
+    <div class="hasil" id="hasilContainer">
+        <h2>Hasil Ujian</h2>
+        <div class="skor-display" id="skorDisplay">0</div>
+        <div class="skor-detail" id="skorDetail"></div>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="kunci-section" id="kunciContainer">
+        <h2>Kunci Jawaban &amp; Pembahasan</h2>
+        <div id="kunciList"></div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   SISTEM KEAMANAN: ANTI-KECURANGAN + ALARM
+   ============================================================ */
+let ujianAktif = true;
+let pelanggaran = 0;
+const MAKS_PELANGGARAN = 3;
+
+/* ---------- WEB AUDIO API: ALARM ---------- */
+let audioCtx = null;
+let alarmInterval = null;
+
+function inisialisasiAudio() {
+    try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (e) {
+        console.warn('Web Audio API tidak didukung browser ini.');
+    }
+}
+
+function bunyikanAlarm() {
+    if (!audioCtx) inisialisasiAudio();
+    if (!audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    // Hentikan alarm sebelumnya
+    if (alarmInterval) clearInterval(alarmInterval);
+
+    let hitungan = 0;
+    alarmInterval = setInterval(() => {
+        if (hitungan >= 8 || !ujianAktif) {
+            clearInterval(alarmInterval);
+            alarmInterval = null;
+            return;
+        }
+        // Nada sirine: tinggi-rendah bergantian
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        const now = audioCtx.currentTime;
+        osc.frequency.setValueAtTime(1000, now);
+        osc.frequency.linearRampToValueAtTime(400, now + 0.18);
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+        hitungan++;
+    }, 300);
+}
+
+/* ---------- TAMPILKAN PERINGATAN ---------- */
+function tampilkanPeringatan(pesan) {
+    pelanggaran++;
+    bunyikanAlarm();
+
+    const el = document.getElementById('peringatan');
+    el.style.display = 'block';
+    el.textContent = '⚠️ KECURANGAN TERDETEKSI! (' + pelanggaran + '/' + MAKS_PELANGGARAN + ') — ' + pesan + ' ⚠️';
+
+    clearTimeout(el._timeout);
+    el._timeout = setTimeout(() => { el.style.display = 'none'; }, 4000);
+
+    // Jika pelanggaran mencapai batas → hentikan ujian
+    if (pelanggaran >= MAKS_PELANGGARAN) {
+        hentikanUjian();
+    }
+}
+
+/* ---------- HENTIKAN UJIAN ---------- */
+function hentikanUjian() {
+    ujianAktif = false;
+    bunyikanAlarm();
+
+    setTimeout(() => {
+        document.getElementById('ujianContainer').style.display = 'none';
+        document.getElementById('blokirPesan').innerHTML =
+            'Anda terdeteksi melakukan <strong>' + pelanggaran + ' kali</strong> tindakan kecurangan ' +
+            '(keluar halaman, pindah tab, membuka aplikasi lain, atau shortcut terlarang).<br><br>' +
+            'Ujian dihentikan dan <strong>tidak dapat dilanjutkan</strong>.';
+        document.getElementById('blokirOverlay').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        window.scrollTo(0, 0);
+    }, 600);
+}
+
+/* ---------- AKTIFKAN PROTEKSI ---------- */
+function aktifkanProteksi() {
+    // 1. Cegah menutup / refresh halaman
+    window.addEventListener('beforeunload', function (e) {
+        if (!ujianAktif) return;
+        e.preventDefault();
+        e.returnValue = 'Ujian sedang berlangsung! Anda yakin ingin keluar?';
+        return e.returnValue;
+    });
+
+    // 2. Deteksi pindah tab / minimize (visibilitychange)
+    document.addEventListener('visibilitychange', function () {
+        if (!ujianAktif) return;
+        if (document.hidden) {
+            tampilkanPeringatan('Anda meninggalkan halaman ujian / pindah tab!');
+        }
+    });
+
+    // 3. Deteksi kehilangan fokus window (alt-tab, klik aplikasi lain)
+    window.addEventListener('blur', function () {
+        if (!ujianAktif) return;
+        tampilkanPeringatan('Fokus jendela ujian hilang!');
+    });
+
+    // 4. Cegah tombol Back
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', function () {
+        if (!ujianAktif) return;
+        history.pushState(null, '', location.href);
+        tampilkanPeringatan('Tombol kembali (Back) dilarang!');
+    });
+
+    // 5. Blokir shortcut keyboard berbahaya
+    document.addEventListener('keydown', function (e) {
+        if (!ujianAktif) return;
+        const key = e.key.toLowerCase();
+        const terlarang =
+            (e.ctrlKey && ['w','t','n','r','p','s','u'].includes(key)) ||
+            (e.altKey && key === 'f4') ||
+            (e.metaKey && ['w','t','n','q'].includes(key)) ||
+            e.key === 'F5' ||
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(key));
+
+        if (terlarang) {
+            e.preventDefault();
+            e.stopPropagation();
+            tampilkanPeringatan('Shortcut keyboard terlarang: ' + e.key);
+            return false;
+        }
+    });
+
+    // 6. Blokir klik kanan (context menu)
+    document.addEventListener('contextmenu', function (e) {
+        if (!ujianAktif) return;
+        e.preventDefault();
+        return false;
+    });
+
+    // 7. Blokir drag & drop (mencegah keluar via drag)
+    document.addEventListener('dragstart', function (e) {
+        if (!ujianAktif) return;
+        e.preventDefault();
+    });
+
+    // 8. Deteksi fullscreen keluar (jika diaktifkan)
+    document.addEventListener('fullscreenchange', function () {
+        if (!ujianAktif) return;
+        if (!document.fullscreenElement) {
+            // tidak otomatis dianggap curang, tapi bisa jadi indikasi
+        }
+    });
+
+    // 9. Deteksi resize ekstrem (indikasi window di-minimize)
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+    window.addEventListener('resize', function () {
+        if (!ujianAktif) return;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        // Jika ukuran menyusut drastis (indikasi minimize)
+        if (w < lastWidth * 0.5 || h < lastHeight * 0.5) {
+            tampilkanPeringatan('Jendela ujian diperkecil / diminimize!');
+        }
+        lastWidth = w;
+        lastHeight = h;
+    });
+}
+
+/* ============================================================
+   DATA SOAL HIDROKARBON
+   ============================================================ */
+const soalPG = [
+    {
+        teks: "LPG yang digunakan di rumah tangga mengandung propana (C₃H₈) dan butana (C₄H₁₀). Kedua senyawa tersebut termasuk golongan hidrokarbon...",
+        pilihan: [
+            "A. Alkana, karena memiliki ikatan tunggal",
+            "B. Alkena, karena memiliki ikatan rangkap dua",
+            "C. Alkuna, karena memiliki ikatan rangkap tiga",
+            "D. Aromatik, karena memiliki cincin benzena",
+            "E. Sikloalkana, karena rantainya tertutup"
+        ],
+        jawaban: "A",
+        pembahasan: "Propana (C₃H₈) dan butana (C₄H₁₀) memiliki rumus umum CnH2n+2 dan hanya ikatan tunggal (C−C), sehingga termasuk alkana.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Perhatikan struktur senyawa berikut:<br><br><span class='struktur'>CH₃−CH(CH₃)−CH₂−CH₃</span><br><br>Nama IUPAC yang tepat untuk senyawa tersebut adalah...",
+        pilihan: [
+            "A. 2-metilbutana",
+            "B. 3-metilbutana",
+            "C. 2-metilpropana",
+            "D. pentana",
+            "E. 1,1-dimetilpropana"
+        ],
+        jawaban: "A",
+        pembahasan: "Rantai utama terpanjang adalah butana (4 atom C). Cabang metil berada pada atom C nomor 2 (dihitung dari ujung terdekat dengan cabang). Nama: 2-metilbutana.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Senyawa hidrokarbon dengan rumus molekul C₄H₈ dapat digolongkan sebagai...",
+        pilihan: [
+            "A. Alkana atau sikloalkana",
+            "B. Alkena atau sikloalkana",
+            "C. Alkuna atau alkadiena",
+            "D. Alkana atau alkena",
+            "E. Alkuna atau sikloalkana"
+        ],
+        jawaban: "B",
+        pembahasan: "C₄H₈ sesuai rumus umum CnH2n, yang dimiliki oleh alkena (satu ikatan rangkap dua) atau sikloalkana (rantai tertutup dengan ikatan tunggal).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Perhatikan reaksi berikut:<br><br><span class='struktur'>C₂H₄ + Br₂ → C₂H₄Br₂</span><br><br>Jenis reaksi yang terjadi adalah...",
+        pilihan: [
+            "A. Substitusi",
+            "B. Adisi",
+            "C. Eliminasi",
+            "D. Pembakaran",
+            "E. Polimerisasi"
+        ],
+        jawaban: "B",
+        pembahasan: "Reaksi adisi adalah reaksi penambahan atom/gugus pada ikatan rangkap, sehingga ikatan rangkap berubah menjadi ikatan tunggal. Etena (C₂H₄) mengadisi Br₂.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Mengapa titik didih alkana meningkat seiring bertambahnya jumlah atom karbon?",
+        pilihan: [
+            "A. Karena massa molekul relatif bertambah sehingga gaya London (gaya dispersi) semakin kuat",
+            "B. Karena jumlah ikatan hidrogen bertambah",
+            "C. Karena kepolaran molekul meningkat",
+            "D. Karena ikatan kovalen semakin kuat",
+            "E. Karena gaya dipol-dipol semakin besar"
+        ],
+        jawaban: "A",
+        pembahasan: "Alkana adalah molekul nonpolar. Semakin panjang rantai karbon (Mr bertambah), gaya dispersi London semakin kuat, sehingga titik didih meningkat.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Nama IUPAC untuk senyawa dengan struktur <span class='struktur'>CH₃−CH=C(CH₃)−CH₃</span> adalah...",
+        pilihan: [
+            "A. 2-metil-2-butena",
+            "B. 2-metil-3-butena",
+            "C. 3-metil-2-butena",
+            "D. 2-metilbutana",
+            "E. 2-butena"
+        ],
+        jawaban: "A",
+        pembahasan: "Rantai utama: butena (4 C dengan ikatan rangkap). Ikatan rangkap diberi nomor terendah: C1−C2=... Cabang metil di C2. Nama: 2-metil-2-butena.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Jumlah isomer struktur yang mungkin untuk alkana dengan rumus C₅H₁₂ adalah...",
+        pilihan: [
+            "A. 2",
+            "B. 3",
+            "C. 4",
+            "D. 5",
+            "E. 6"
+        ],
+        jawaban: "B",
+        pembahasan: "Isomer C₅H₁₂: n-pentana, 2-metilbutana (isopentana), dan 2,2-dimetilpropana (neopentana). Total 3 isomer.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Perhatikan data titik didih beberapa hidrokarbon berikut:<br><br><table><tr><th>Senyawa</th><th>Titik Didih (°C)</th></tr><tr><td>CH₄</td><td>−161</td></tr><tr><td>C₂H₆</td><td>−89</td></tr><tr><td>C₃H₈</td><td>−42</td></tr><tr><td>C₄H₁₀</td><td>−0,5</td></tr></table><br>Berdasarkan data tersebut, simpulan yang tepat adalah...",
+        pilihan: [
+            "A. Titik didih alkana berbanding terbalik dengan Mr",
+            "B. Titik didih alkana meningkat seiring bertambahnya jumlah atom C",
+            "C. Alkana dengan Mr kecil memiliki titik didih tinggi",
+            "D. Titik didih alkana tidak dipengaruhi jumlah atom C",
+            "E. Alkana dengan cabang memiliki titik didih lebih tinggi"
+        ],
+        jawaban: "B",
+        pembahasan: "Data menunjukkan titik didih naik dari CH₄ (−161°C) ke C₄H₁₀ (−0,5°C) seiring bertambahnya jumlah atom karbon (Mr).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Mengapa plastik (polimer hidrokarbon) sulit terurai secara alami di lingkungan?",
+        pilihan: [
+            "A. Karena ikatan kovalen C−C sangat kuat dan tidak reaktif, sehingga mikroorganisme sulit memecahnya",
+            "B. Karena plastik mudah larut dalam air",
+            "C. Karena plastik tersusun dari ikatan ion yang stabil",
+            "D. Karena plastik mengandung banyak oksigen",
+            "E. Karena plastik memiliki titik didih rendah"
+        ],
+        jawaban: "A",
+        pembahasan: "Polimer plastik tersusun dari rantai karbon panjang dengan ikatan kovalen C−C yang sangat kuat dan nonpolar, sehingga sukar terdegradasi secara alami (non-biodegradable).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Senyawa hidrokarbon yang memiliki ikatan rangkap tiga adalah...",
+        pilihan: [
+            "A. C₂H₆",
+            "B. C₃H₆",
+            "C. C₂H₂",
+            "D. C₄H₈",
+            "E. C₅H₁₂"
+        ],
+        jawaban: "C",
+        pembahasan: "Alkuna memiliki rumus umum CnH2n−2 dan ikatan rangkap tiga. C₂H₂ (etuna/asetilena) memenuhi rumus CnH2n−2 dengan n=2 → C₂H₂.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Reaksi pembakaran sempurna hidrokarbon menghasilkan...",
+        pilihan: [
+            "A. CO dan H₂O",
+            "B. CO₂ dan H₂O",
+            "C. C dan H₂O",
+            "D. CO₂ dan H₂",
+            "E. CO dan H₂"
+        ],
+        jawaban: "B",
+        pembahasan: "Pembakaran sempurna hidrokarbon (dengan oksigen berlebih) menghasilkan CO₂ dan H₂O. Jika tidak sempurna, menghasilkan CO atau C.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Perhatikan reaksi berikut:<br><br><span class='struktur'>CH₄ + Cl₂ → CH₃Cl + HCl</span><br><br>Reaksi tersebut berlangsung dengan bantuan sinar UV. Jenis reaksi tersebut adalah...",
+        pilihan: [
+            "A. Adisi",
+            "B. Substitusi",
+            "C. Eliminasi",
+            "D. Pembakaran",
+            "E. Kondensasi"
+        ],
+        jawaban: "B",
+        pembahasan: "Reaksi substitusi adalah penggantian atom H oleh atom lain (Cl). Alkana mengalami reaksi substitusi dengan halogen (Cl₂) dibantu sinar UV.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Sebuah senyawa hidrokarbon memiliki rumus molekul C₆H₁₂ dan tidak memiliki ikatan rangkap. Senyawa tersebut kemungkinan adalah...",
+        pilihan: [
+            "A. Heksana",
+            "B. Sikloheksana",
+            "C. Heksena",
+            "D. Heksuna",
+            "E. Benzena"
+        ],
+        jawaban: "B",
+        pembahasan: "C₆H₁₂ sesuai rumus CnH2n. Jika tidak ada ikatan rangkap, maka senyawa tersebut adalah sikloalkana (rantai tertutup) → sikloheksana. Heksana memiliki rumus C₆H₁₄.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Nama IUPAC untuk senyawa dengan struktur <span class='struktur'>CH≡C−CH₂−CH₃</span> adalah...",
+        pilihan: [
+            "A. 1-butuna",
+            "B. 2-butuna",
+            "C. 1-butena",
+            "D. butana",
+            "E. 2-butena"
+        ],
+        jawaban: "A",
+        pembahasan: "Rantai utama 4 atom C dengan ikatan rangkap tiga di C1 → 1-butuna (but-1-una).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Perhatikan pernyataan tentang kekhasan atom karbon berikut:<br>(1) Atom C dapat membentuk 4 ikatan kovalen.<br>(2) Atom C dapat membentuk rantai panjang.<br>(3) Atom C hanya dapat berikatan dengan atom C.<br>(4) Atom C dapat membentuk ikatan rangkap.<br><br>Pernyataan yang benar adalah...",
+        pilihan: [
+            "A. (1), (2), dan (4)",
+            "B. (1), (2), dan (3)",
+            "C. (2), (3), dan (4)",
+            "D. (1) dan (3)",
+            "E. (1), (2), (3), dan (4)"
+        ],
+        jawaban: "A",
+        pembahasan: "Atom karbon memiliki 4 elektron valensi sehingga dapat membentuk 4 ikatan kovalen, dapat membentuk rantai (dengan C maupun atom lain), dan dapat membentuk ikatan rangkap. Pernyataan (3) salah karena C juga dapat berikatan dengan H, O, N, dll.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Bensin dan minyak tanah memiliki sifat fisika yang berbeda. Perbedaan utama yang menyebabkan hal tersebut adalah...",
+        pilihan: [
+            "A. Jumlah atom karbon (panjang rantai) yang berbeda",
+            "B. Jenis ikatan rangkap yang berbeda",
+            "C. Kandungan oksigen yang berbeda",
+            "D. Warna zat yang berbeda",
+            "E. Adanya gugus fungsi yang berbeda"
+        ],
+        jawaban: "A",
+        pembahasan: "Bensin dan minyak tanah sama-sama alkana, tetapi memiliki panjang rantai (jumlah atom C) berbeda. Semakin panjang rantai, titik didih semakin tinggi. Minyak tanah memiliki rantai lebih panjang dari bensin.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Perhatikan struktur berikut:<br><br><span class='struktur'>CH₃−CH₂−CH(CH₃)−CH₂−CH₃</span><br><br>Jumlah atom karbon primer, sekunder, dan tersier berturut-turut adalah...",
+        pilihan: [
+            "A. 3, 2, 1",
+            "B. 2, 3, 1",
+            "C. 1, 2, 3",
+            "D. 3, 1, 2",
+            "E. 2, 1, 3"
+        ],
+        jawaban: "A",
+        pembahasan: "Struktur: C1 (primer, ujung kiri), C2 (sekunder), C3 (tersier, karena terikat 3 atom C), C4 (sekunder), C5 (primer, ujung kanan), dan cabang CH₃ (primer). Jadi primer: 3 (C1, C5, cabang); sekunder: 2 (C2, C4); tersier: 1 (C3).",
+        tingkat: "sulit"
+    },
+    {
+        teks: "Gas alam yang digunakan sebagai bahan bakar kompor mengandung sebagian besar metana (CH₄). Ketika metana dibakar sempurna, persamaan reaksi setara yang benar adalah...",
+        pilihan: [
+            "A. CH₄ + O₂ → CO₂ + 2H₂O",
+            "B. CH₄ + 2O₂ → CO₂ + 2H₂O",
+            "C. 2CH₄ + 3O₂ → 2CO₂ + 4H₂O",
+            "D. CH₄ + 3O₂ → CO₂ + 2H₂O",
+            "E. CH₄ + 2O₂ → CO + 2H₂O"
+        ],
+        jawaban: "B",
+        pembahasan: "Pembakaran sempurna metana: CH₄ + 2O₂ → CO₂ + 2H₂O. Periksa keseimbangan: C=1, H=4, O=4 (kiri) = O=4 (kanan).",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Senyawa dengan rumus molekul C₃H₄ merupakan golongan...",
+        pilihan: [
+            "A. Alkana",
+            "B. Alkena",
+            "C. Alkuna atau alkadiena",
+            "D. Sikloalkana",
+            "E. Aromatik"
+        ],
+        jawaban: "C",
+        pembahasan: "C₃H₄ sesuai rumus CnH2n−2, yang dimiliki oleh alkuna (satu ikatan rangkap tiga) atau alkadiena (dua ikatan rangkap dua).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Perhatikan reaksi: <span class='struktur'>C₃H₈ → C₃H₆ + H₂</span>. Reaksi tersebut termasuk jenis reaksi...",
+        pilihan: [
+            "A. Adisi",
+            "B. Substitusi",
+            "C. Eliminasi",
+            "D. Pembakaran",
+            "E. Netralisasi"
+        ],
+        jawaban: "C",
+        pembahasan: "Reaksi eliminasi adalah pelepasan atom/gugus dari molekul sehingga terbentuk ikatan rangkap. Propana melepas H₂ menjadi propena.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Berikut ini yang bukan merupakan kegunaan hidrokarbon dalam kehidupan sehari-hari adalah...",
+        pilihan: [
+            "A. LPG sebagai bahan bakar rumah tangga",
+            "B. Bensin sebagai bahan bakar kendaraan",
+            "C. Aspal sebagai pelapis jalan",
+            "D. Plastik sebagai kemasan makanan",
+            "E. Air sebagai pelarut universal"
+        ],
+        jawaban: "E",
+        pembahasan: "Air (H₂O) bukan hidrokarbon. Hidrokarbon tersusun dari atom C dan H. LPG, bensin, aspal, dan plastik merupakan produk hidrokarbon.",
+        tingkat: "mudah"
+    },
+    {
+        teks: "Perhatikan tabel berikut:<br><br><table><tr><th>Senyawa</th><th>Rumus Molekul</th></tr><tr><td>P</td><td>C₂H₆</td></tr><tr><td>Q</td><td>C₂H₄</td></tr><tr><td>R</td><td>C₂H₂</td></tr></table><br>Pernyataan yang benar mengenai ketiga senyawa tersebut adalah...",
+        pilihan: [
+            "A. P alkana, Q alkena, R alkuna",
+            "B. P alkena, Q alkuna, R alkana",
+            "C. P alkuna, Q alkena, R alkana",
+            "D. P alkana, Q alkuna, R alkena",
+            "E. P, Q, dan R semuanya alkana"
+        ],
+        jawaban: "A",
+        pembahasan: "C₂H₆ = CnH2n+2 → alkana (etana). C₂H₄ = CnH2n → alkena (etena). C₂H₂ = CnH2n−2 → alkuna (etuna).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Suatu senyawa hidrokarbon memiliki 6 atom karbon dan 12 atom hidrogen, serta tidak memiliki ikatan rangkap. Senyawa tersebut adalah...",
+        pilihan: [
+            "A. Heksana",
+            "B. Heksena",
+            "C. Sikloheksana",
+            "D. Heksuna",
+            "E. Benzena"
+        ],
+        jawaban: "C",
+        pembahasan: "C₆H₁₂ (CnH2n) tanpa ikatan rangkap → sikloalkana → sikloheksana. Heksana = C₆H₁₄, heksena = C₆H₁₂ (punya ikatan rangkap), heksuna = C₆H₁₀.",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Dampak pembakaran hidrokarbon yang tidak sempurna terhadap lingkungan adalah...",
+        pilihan: [
+            "A. Menghasilkan CO₂ yang menyebabkan hujan asam",
+            "B. Menghasilkan CO yang beracun dan jelaga karbon",
+            "C. Menghasilkan O₂ berlebih",
+            "D. Menghasilkan H₂O yang mencemari udara",
+            "E. Menghasilkan N₂ yang berbahaya"
+        ],
+        jawaban: "B",
+        pembahasan: "Pembakaran tidak sempurna menghasilkan gas CO (karbon monoksida) yang beracun dan partikel karbon (jelaga). CO₂ dihasilkan pada pembakaran sempurna dan berkontribusi pada efek rumah kaca (bukan hujan asam utama).",
+        tingkat: "sedang"
+    },
+    {
+        teks: "Nama IUPAC untuk senyawa <span class='struktur'>CH₃−CH₂−CH₂−CH₂−CH₃</span> adalah...",
+        pilihan: [
+            "A. Pentana",
+            "B. 2-metilbutana",
+            "C. Isopentana",
+            "D. Neopentana",
+            "E. Butana"
+        ],
+        jawaban: "A",
+        pembahasan: "Rantai lurus dengan 5 atom karbon dan hanya ikatan tunggal → pentana.",
+        tingkat: "mudah"
+    }
+];
+
+const soalPGK = [
+    {
+        teks: "Pernyataan berikut yang benar mengenai alkana adalah...<br><em>(Pilih semua jawaban yang benar)</em>",
+        pilihan: [
+            "A. Memiliki rumus umum CnH2n+2",
+            "B. Semua ikatannya adalah ikatan tunggal",
+            "C. Dapat mengalami reaksi adisi",
+            "D. Dapat mengalami reaksi substitusi dengan halogen",
+            "E. Memiliki ikatan rangkap dua"
+        ],
+        jawaban: ["A", "B", "D"],
+        pembahasan: "Alkana: CnH2n+2, ikatan tunggal, dan reaksi khasnya substitusi. Alkana tidak dapat mengalami adisi (itu reaksi alkena/alkuna). E salah."
+    },
+    {
+        teks: "Perhatikan senyawa hidrokarbon berikut:<br>(1) C₂H₆<br>(2) C₃H₆<br>(3) C₂H₂<br>(4) C₄H₁₀<br><br>Pernyataan yang benar adalah...<br><em>(Pilih semua jawaban yang benar)</em>",
+        pilihan: [
+            "A. (1) dan (4) adalah alkana",
+            "B. (2) adalah alkena",
+            "C. (3) adalah alkuna",
+            "D. Semua senyawa memiliki ikatan rangkap",
+            "E. (2) dan (3) memiliki rumus umum yang sama"
+        ],
+        jawaban: ["A", "B", "C"],
+        pembahasan: "C₂H₆ dan C₄H₁₀ = alkana (CnH2n+2). C₃H₆ = alkena (CnH2n). C₂H₂ = alkuna (CnH2n−2). D salah karena alkana tidak punya ikatan rangkap. E salah karena rumus umum alkena dan alkuna berbeda."
+    },
+    {
+        teks: "Faktor yang mempengaruhi titik didih hidrokarbon adalah...<br><em>(Pilih semua jawaban yang benar)</em>",
+        pilihan: [
+            "A. Jumlah atom karbon (panjang rantai)",
+            "B. Adanya cabang pada rantai",
+            "C. Jenis ikatan (tunggal/rangkap)",
+            "D. Warna senyawa",
+            "E. Massa molekul relatif"
+        ],
+        jawaban: ["A", "B", "C", "E"],
+        pembahasan: "Titik didih dipengaruhi oleh panjang rantai (Mr), adanya cabang (menurunkan titik didih), dan jenis ikatan. Warna tidak mempengaruhi titik didih."
+    },
+    {
+        teks: "Reaksi yang dapat terjadi pada alkena adalah...<br><em>(Pilih semua jawaban yang benar)</em>",
+        pilihan: [
+            "A. Adisi dengan H₂",
+            "B. Adisi dengan Br₂",
+            "C. Substitusi dengan Cl₂",
+            "D. Pembakaran",
+            "E. Eliminasi membentuk alkuna"
+        ],
+        jawaban: ["A", "B", "D"],
+        pembahasan: "Alkena dapat mengalami adisi (dengan H₂, Br₂, HX, H₂O) dan pembakaran. Substitusi khas alkana. Eliminasi dari alkena menghasilkan alkuna kurang umum (biasanya dari alkana ke alkena)."
+    },
+    {
+        teks: "Dampak negatif penggunaan hidrokarbon terhadap lingkungan meliputi...<br><em>(Pilih semua jawaban yang benar)</em>",
+        pilihan: [
+            "A. Peningkatan gas CO₂ penyebab efek rumah kaca",
+            "B. Polusi udara oleh gas CO dari pembakaran tidak sempurna",
+            "C. Pencemaran tanah dan air oleh limbah plastik",
+            "D. Penipisan lapisan ozon oleh CFC (bukan hidrokarbon murni)",
+            "E. Tumpahan minyak di laut"
+        ],
+        jawaban: ["A", "B", "C", "E"],
+        pembahasan: "A, B, C, E merupakan dampak hidrokarbon. CFC mengandung halogen (bukan hidrokarbon murni), meskipun terkait penipisan ozon."
+    }
+];
+
+const soalUraian = [
+    {
+        teks: "Perhatikan struktur senyawa berikut:<br><br><span class='struktur'>CH₃−CH(CH₃)−CH₂−CH₂−CH₃</span><br><br>a) Tentukan nama IUPAC senyawa tersebut!<br>b) Tentukan jumlah atom karbon primer, sekunder, dan tersier!<br>c) Tuliskan rumus molekulnya!",
+        jawaban: "a) Rantai utama terpanjang = pentana (5 C). Cabang metil di C2. Nama: 2-metilpentana.<br>b) Primer: C1, C5, dan cabang metil = 3. Sekunder: C3, C4 = 2. Tersier: C2 = 1.<br>c) Rumus molekul: C₆H₁₄.",
+        pembahasan: "Tentukan rantai terpanjang, beri nomor dari ujung terdekat cabang, identifikasi jenis atom C berdasarkan jumlah atom C tetangga."
+    },
+    {
+        teks: "Sebanyak 1 mol gas etena (C₂H₄) direaksikan dengan 1 mol gas H₂ menggunakan katalis Ni.<br><br>a) Tuliskan persamaan reaksinya!<br>b) Sebutkan jenis reaksinya!<br>c) Apa nama produk yang dihasilkan?",
+        jawaban: "a) C₂H₄ + H₂ → C₂H₆ (dengan katalis Ni)<br>b) Reaksi adisi (hidrogenasi)<br>c) Etana",
+        pembahasan: "Adisi H₂ pada ikatan rangkap alkena menghasilkan alkana. Etena + H₂ → etana."
+    },
+    {
+        teks: "Diketahui tiga senyawa hidrokarbon:<br>P: C₃H₈<br>Q: C₃H₆<br>R: C₃H₄<br><br>a) Tentukan golongan masing-masing senyawa (alkana/alkena/alkuna)!<br>b) Jelaskan alasan berdasarkan rumus umum!<br>c) Manakah yang dapat mengalami reaksi adisi? Jelaskan!",
+        jawaban: "a) P = alkana, Q = alkena, R = alkuna.<br>b) P: CnH2n+2 (n=3 → C₃H₈) = alkana. Q: CnH2n (n=3 → C₃H₆) = alkena. R: CnH2n−2 (n=3 → C₃H₄) = alkuna.<br>c) Q dan R dapat mengalami adisi karena memiliki ikatan rangkap (dua dan tiga). P tidak, karena hanya ikatan tunggal.",
+        pembahasan: "Cocokkan rumus molekul dengan rumus umum tiap golongan. Adisi terjadi pada ikatan rangkap."
+    },
+    {
+        teks: "Jelaskan mengapa:<br>a) Titik didih n-pentana lebih tinggi daripada 2,2-dimetilpropana!<br>b) LPG (propana/butana) mudah menguap pada suhu kamar, sedangkan minyak tanah tidak!",
+        jawaban: "a) n-pentana adalah rantai lurus sehingga molekul dapat tersusun rapat dan gaya dispersi London lebih kuat, sehingga titik didih lebih tinggi. 2,2-dimetilpropana memiliki rantai bercabang yang membuat molekul lebih bulat/kompak sehingga gaya antarmolekul lebih lemah dan titik didih lebih rendah.<br>b) LPG (C₃−C₄) memiliki rantai karbon pendek sehingga gaya antarmolekul lemah dan mudah menguap pada suhu kamar. Minyak tanah memiliki rantai karbon lebih panjang (C₁₀−C₁₆) sehingga gaya antarmolekul lebih kuat dan kurang mudah menguap.",
+        pembahasan: "Titik didih dipengaruhi panjang rantai dan percabangan. Rantai pendek → mudah menguap."
+    },
+    {
+        teks: "Perhatikan reaksi pembakaran berikut:<br><br><span class='struktur'>C₄H₁₀ + O₂ → CO₂ + H₂O</span><br><br>a) Setarakan persamaan reaksi tersebut!<br>b) Jika 2 mol C₄H₁₀ dibakar sempurna, berapa mol CO₂ dan H₂O yang dihasilkan?<br>c) Sebutkan dampak lingkungan jika pembakaran berlangsung tidak sempurna!",
+        jawaban: "a) 2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O (atau C₄H₁₀ + 13/2 O₂ → 4CO₂ + 5H₂O)<br>b) Perbandingan koefisien: 1 C₄H₁₀ → 4 CO₂ dan 5 H₂O. Untuk 2 mol: 8 mol CO₂ dan 10 mol H₂O.<br>c) Pembakaran tidak sempurna menghasilkan gas CO (beracun) dan partikel karbon (jelaga) yang mencemari udara.",
+        pembahasan: "Setarakan atom C, H, lalu O. Gunakan perbandingan koefisien untuk menghitung mol produk. Pembakaran tidak sempurna → CO dan C."
+    }
+];
+
+/* ============================================================
+   RENDER SOAL
+   ============================================================ */
+function renderSoal() {
+    const container = document.getElementById('soalContainer');
+    let html = '';
+
+    html += `<div class="petunjuk">
+        <strong>📋 Petunjuk Pengerjaan:</strong>
+        <ol>
+            <li>Bacalah setiap soal dengan teliti dan cermat.</li>
+            <li>Soal pilihan ganda: pilih <strong>satu</strong> jawaban yang paling benar.</li>
+            <li>Soal pilihan ganda kompleks: pilih <strong>semua</strong> jawaban yang benar.</li>
+            <li>Soal uraian: tulis jawaban lengkap dengan langkah penyelesaian.</li>
+            <li>Waktu pengerjaan: <strong>90 menit</strong>.</li>
+            <li>🔒 <strong>DILARANG KELUAR</strong> dari halaman ujian. Jika terdeteksi kecurangan (pindah tab, alt-tab, back, shortcut terlarang), <strong>alarm akan berbunyi</strong> dan ujian dihentikan setelah 3 pelanggaran.</li>
+        </ol>
+    </div>`;
+
+    html += `<div class="section-title">BAGIAN A — PILIHAN GANDA (25 Soal)</div>`;
+
+    soalPG.forEach((s, i) => {
+        const nomor = i + 1;
+        const tingkatClass = s.tingkat === 'sulit' ? 'tipe-hots' : 'tipe-pg';
+        const tingkatLabel = s.tingkat === 'sulit' ? 'HOTS' : (s.tingkat === 'sedang' ? 'Sedang' : 'Mudah');
+        html += `<div class="soal">
+            <div class="soal-header">
+                <span class="soal-nomor">Soal ${nomor}</span>
+                <span class="soal-tipe ${tingkatClass}">${tingkatLabel}</span>
+            </div>
+            <div class="soal-text">${s.teks}</div>
+            <div class="pilihan">
+                ${s.pilihan.map((p, j) => {
+                    const val = String.fromCharCode(65 + j);
+                    return `<label>
+                        <input type="radio" name="pg-${i}" value="${val}" onchange="simpanJawaban('pg', ${i}, '${val}')">
+                        <span>${p}</span>
+                    </label>`;
+                }).join('')}
+            </div>
+        </div>`;
+    });
+
+    html += `<div class="section-title">BAGIAN B — PILIHAN GANDA KOMPLEKS (5 Soal)</div>`;
+    html += `<div class="petunjuk" style="background:#f3e5f5;border-left-color:#7b1fa2;">
+        <strong>ℹ️ Catatan:</strong> Pilih <strong>semua</strong> jawaban yang benar. Setiap soal bisa memiliki lebih dari satu jawaban benar.
+    </div>`;
+
+    soalPGK.forEach((s, i) => {
+        const nomor = 26 + i;
+        html += `<div class="soal">
+            <div class="soal-header">
+                <span class="soal-nomor">Soal ${nomor}</span>
+                <span class="soal-tipe tipe-pgk">PG Kompleks</span>
+            </div>
+            <div class="soal-text">${s.teks}</div>
+            <div class="pilihan">
+                ${s.pilihan.map((p, j) => {
+                    const val = String.fromCharCode(65 + j);
+                    return `<label>
+                        <input type="checkbox" name="pgk-${i}" value="${val}" onchange="simpanJawabanPGK(${i})">
+                        <span>${p}</span>
+                    </label>`;
+                }).join('')}
+            </div>
+        </div>`;
+    });
+
+    html += `<div class="section-title">BAGIAN C — URAIAN (5 Soal)</div>`;
+    html += `<div class="petunjuk" style="background:#e8f5e9;border-left-color:#2e7d32;">
+        <strong>✍️ Petunjuk:</strong> Jawablah dengan lengkap dan jelas. Tunjukkan langkah-langkah penyelesaian.
+    </div>`;
+
+    soalUraian.forEach((s, i) => {
+        const nomor = 31 + i;
+        html += `<div class="soal">
+            <div class="soal-header">
+                <span class="soal-nomor">Soal ${nomor}</span>
+                <span class="soal-tipe tipe-uraian">Uraian</span>
+            </div>
+            <div class="soal-text">${s.teks}</div>
+            <textarea class="jawaban-uraian" id="uraian-${i}" placeholder="Tulis jawaban Anda di sini..." onchange="simpanJawabanUraian(${i})"></textarea>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+}
+
+/* ============================================================
+   PENYIMPANAN JAWABAN
+   ============================================================ */
+const jawabanSiswa = { pg: {}, pgk: {}, uraian: {} };
+
+function simpanJawaban(tipe, index, value) { jawabanSiswa[tipe][index] = value; }
+
+function simpanJawabanPGK(index) {
+    const checked = document.querySelectorAll(`input[name="pgk-${index}"]:checked`);
+    jawabanSiswa.pgk[index] = Array.from(checked).map(cb => cb.value).sort();
+}
+
+function simpanJawabanUraian(index) {
+    jawabanSiswa.uraian[index] = document.getElementById(`uraian-${index}`).value;
+}
+
+/* ============================================================
+   HITUNG SKOR
+   ============================================================ */
+function hitungSkor() {
+    let benarPG = 0;
+    let benarPGK = 0;
+    let skorUraian = 0;
+    let detailPG = [], detailPGK = [], detailUraian = [];
+
+    soalPG.forEach((s, i) => {
+        const jawab = jawabanSiswa.pg[i];
+        const benar = jawab === s.jawaban;
+        if (benar) benarPG++;
+        detailPG.push({ nomor: i + 1, jawab: jawab || '-', kunci: s.jawaban, benar });
+    });
+
+    soalPGK.forEach((s, i) => {
+        const jawab = jawabanSiswa.pgk[i] || [];
+        const kunci = [...s.jawaban].sort();
+        const benar = jawab.length === kunci.length && jawab.every((v, idx) => v === kunci[idx]);
+        if (benar) benarPGK++;
+        detailPGK.push({ nomor: 26 + i, jawab: jawab.join(', ') || '-', kunci: kunci.join(', '), benar });
+    });
+
+    soalUraian.forEach((s, i) => {
+        const jawab = (jawabanSiswa.uraian[i] || '').toLowerCase();
+        const kataKunci = s.jawaban.toLowerCase().split(/\s+/).filter(k => k.length > 4);
+        let cocok = 0;
+        kataKunci.forEach(k => { if (jawab.includes(k)) cocok++; });
+        const persen = kataKunci.length > 0 ? cocok / kataKunci.length : 0;
+        const nilai = persen >= 0.3 ? 20 : (persen >= 0.15 ? 10 : 0);
+        skorUraian += nilai;
+        detailUraian.push({ nomor: 31 + i, nilai, maksimal: 20 });
+    });
+
+    const skorPG = (benarPG / soalPG.length) * 50;
+    const skorPGK = (benarPGK / soalPGK.length) * 20;
+    const skorUraianFinal = (skorUraian / (soalUraian.length * 20)) * 30;
+    const totalSkor = Math.round(skorPG + skorPGK + skorUraianFinal);
+
+    document.getElementById('skorDisplay').textContent = totalSkor;
+    document.getElementById('skorDetail').innerHTML = `
+        <div class="skor-card"><h3>Pilihan Ganda</h3><p>${benarPG} / ${soalPG.length}</p></div>
+        <div class="skor-card"><h3>PG Kompleks</h3><p>${benarPGK} / ${soalPGK.length}</p></div>
+        <div class="skor-card"><h3>Uraian</h3><p>${skorUraian} / ${soalUraian.length * 20}</p></div>
+    `;
+
+    const feedback = document.getElementById('feedback');
+    if (totalSkor >= 75) {
+        feedback.className = 'feedback lulus';
+        feedback.textContent = '🎉 Selamat! Anda LULUS dengan nilai ' + totalSkor + '. Pertahankan!';
+    } else {
+        feedback.className = 'feedback tidak-lulus';
+        feedback.textContent = '📚 Nilai Anda ' + totalSkor + '. Silakan pelajari kembali materi Hidrokarbon.';
+    }
+
+    document.getElementById('hasilContainer').style.display = 'block';
+    document.getElementById('hasilContainer').scrollIntoView({ behavior: 'smooth' });
+    tampilkanKunci(detailPG, detailPGK, detailUraian);
+}
+
+function tampilkanKunci(detailPG, detailPGK, detailUraian) {
+    const kunciContainer = document.getElementById('kunciList');
+    let html = '';
+
+    html += `<h3 style="color:#0f5132;margin:15px 0 10px;">A. Pilihan Ganda</h3>`;
+    soalPG.forEach((s, i) => {
+        const d = detailPG[i];
+        html += `<div class="kunci-item">
+            <strong>Soal ${i + 1}:</strong> Jawaban: ${d.kunci}
+            ${d.jawab !== '-' ? `(Jawaban Anda: ${d.jawab})` : '(Tidak dijawab)'}
+            <span class="${d.benar ? 'badge-benar' : 'badge-salah'}">${d.benar ? '✓ Benar' : '✗ Salah'}</span>
+            <div class="pembahasan">📖 ${s.pembahasan}</div>
+        </div>`;
+    });
+
+    html += `<h3 style="color:#7b1fa2;margin:20px 0 10px;">B. Pilihan Ganda Kompleks</h3>`;
+    soalPGK.forEach((s, i) => {
+        const d = detailPGK[i];
+        html += `<div class="kunci-item" style="border-left-color:#7b1fa2;">
+            <strong>Soal ${26 + i}:</strong> Jawaban: ${d.kunci}
+            ${d.jawab !== '-' ? `(Jawaban Anda: ${d.jawab})` : '(Tidak dijawab)'}
+            <span class="${d.benar ? 'badge-benar' : 'badge-salah'}">${d.benar ? '✓ Benar' : '✗ Salah'}</span>
+            <div class="pembahasan">📖 ${s.pembahasan}</div>
+        </div>`;
+    });
+
+    html += `<h3 style="color:#2e7d32;margin:20px 0 10px;">C. Uraian</h3>`;
+    soalUraian.forEach((s, i) => {
+        const d = detailUraian[i];
+        html += `<div class="kunci-item" style="border-left-color:#2e7d32;">
+            <strong>Soal ${31 + i}:</strong> Nilai: ${d.nilai}/20
+            <div class="pembahasan"><strong>Jawaban:</strong> ${s.jawaban}<br><br><strong>Pembahasan:</strong> ${s.pembahasan}</div>
+        </div>`;
+    });
+
+    kunciContainer.innerHTML = html;
+    document.getElementById('kunciContainer').style.display = 'block';
+}
+
+function resetUjian() {
+    jawabanSiswa.pg = {};
+    jawabanSiswa.pgk = {};
+    jawabanSiswa.uraian = {};
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+    document.querySelectorAll('.jawaban-uraian').forEach(t => t.value = '');
+    document.getElementById('hasilContainer').style.display = 'none';
+    document.getElementById('kunciContainer').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   INISIALISASI
+   ============================================================ */
+(function init() {
+    inisialisasiAudio();
+    renderSoal();
+    aktifkanProteksi();
+
+    // Aktifkan audio pada interaksi pertama pengguna
+    document.addEventListener('click', function resumeAudio() {
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        document.removeEventListener('click', resumeAudio);
+    }, { once: true });
+
+    document.addEventListener('keydown', function resumeAudioKey() {
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        document.removeEventListener('keydown', resumeAudioKey);
+    }, { once: true });
+})();
+</script>
+</body>
+</html>
